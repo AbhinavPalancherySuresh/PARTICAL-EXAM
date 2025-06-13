@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title> Mini-Project – Set B</title>
+  <style>
+    body { font-family: Arial, sans-serif; background-color: #f2f2f2; padding: 20px; }
+    h1, h2, h3 { color: #2e3d49; }
+    .info {
+      background-color: #0d4d66; color: white; padding: 10px;
+      width: 80%; margin-bottom: 20px; border-radius: 4px;
+    }
+    .tasks {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 15px; margin-bottom: 30px;
+    }
+    .task-box {
+      background-color: #0d4d66; color: white; padding: 15px;
+      border-radius: 5px; text-align: center;
+      cursor: pointer; user-select: none;
+      transition: background 0.2s;
+    }
+    .task-box:hover { background-color: #10759e; }
+    #outputArea {
+      background: white; border-radius: 5px; padding: 20px;
+    }
+    #outputArea pre {
+      background: #eee; padding: 10px; border-radius: 4px;
+      overflow-x: auto;
+    }
+    .label { font-weight: bold; }
+  </style>
+</head>
+<body>
+
+  <h1> Mini-Project – Set B</h1>
+  <h2>STUDENT NAME: ABHINAV PALANCHERY SURESH</h2>
+  <h2>DATE: 13.06.2025</h2>
+  <h2>SUBJECT: Web Technology</h2>
+  <h3>INFORMATION:</h3>
+  <div class="info">I am studying in 1st semester student of information system in ISMA university.</div>
+
+  <h3>Click a Task to Run It:</h3>
+  <div class="tasks">
+    <div class="task-box" data-task="1">Task 1</div>
+    <div class="task-box" data-task="2">Task 2</div>
+    <div class="task-box" data-task="3">Task 3</div>
+    <div class="task-box" data-task="4">Task 4</div>
+    <div class="task-box" data-task="5">Task 5</div>
+    <div class="task-box" data-task="6">Task 6</div>
+    <div class="task-box" data-task="7">Task 7</div>
+    <div class="task-box" data-task="8">Task 8</div>
+    <div class="task-box" data-task="9">Task 9</div>
+    <div class="task-box" data-task="10">Task 10</div>
+  </div>
+
+  <div id="outputArea">
+    <h3>Output</h3>
+    <div id="outputContent">
+      <p>Click one of the tasks above to see its question and result.</p>
+    </div>
+  </div>
+
+  <script>
+    function task1() {
+      const question = "1. Find the last element from a given array (via popup)";
+      const input = prompt("Enter array items (comma-separated):", "apple,banana,cherry");
+      const arr = input.split(",");
+      const last = arr[arr.length - 1];
+      return {
+        question,
+        code: `Last of [${arr}] = ${last}`,
+        result: `Last element = ${last}`
+      };
+    }
+
+    function task2() {
+      const question = "2. Allow only 10 digits in a text input (popup)";
+      const input = prompt("Enter a 10-digit number:");
+      const valid = /^\d{10}$/.test(input);
+      return {
+        question,
+        code: `Input = "${input}"`,
+        result: valid ? "Valid 10-digit number!" : "Invalid input. Only 10 digits allowed."
+      };
+    }
+
+    function task3() {
+      const question = "3. Find specific word in array and repeated characters";
+      const array = prompt("Enter array items:", "apple,banana,grape,banana");
+      const word = prompt("Enter word to search:", "banana");
+      const arr = array.split(",");
+      const count = arr.filter(x => x === word).length;
+      const repeated = [...word].filter((c, i, a) => a.indexOf(c) !== i && a.lastIndexOf(c) === i);
+      return {
+        question,
+        code: `Array = [${arr}], Word = ${word}`,
+        result: `Word found ${count} times.\nRepeated characters: ${[...new Set(repeated)].join(", ")}`
+      };
+    }
+
+    function task4() {
+      const question = "4. Count vowels in entered string";
+      const input = prompt("Enter a string:", "JavaScript");
+      const count = (input.match(/[aeiou]/gi) || []).length;
+      return {
+        question,
+        code: `Input = "${input}"`,
+        result: `Vowels count = ${count}`
+      };
+    }
+
+    function task5() {
+      const question = "5. Find the longest word in a string";
+      const input = prompt("Enter a sentence:", "The quick brown fox jumps over");
+      const longest = input.split(" ").reduce((a, b) => a.length > b.length ? a : b);
+      return {
+        question,
+        code: `Sentence = "${input}"`,
+        result: `Longest word = ${longest}`
+      };
+    }
+
+    function task6() {
+      const question = "6. Convert UPPERCASE to lowercase and vice versa";
+      const input = prompt("Enter a sentence:", "JavaScript IS Fun");
+      const converted = [...input].map(ch =>
+        ch === ch.toUpperCase() ? ch.toLowerCase() : ch.toUpperCase()
+      ).join("");
+      return {
+        question,
+        code: `Input = "${input}"`,
+        result: `Converted = ${converted}`
+      };
+    }
+
+    function task7() {
+      const question = "7. Find location (index) of word in string";
+      const sentence = prompt("Enter sentence:", "Web technology is interesting");
+      const word = prompt("Enter word to find:", "technology");
+      const index = sentence.indexOf(word);
+      return {
+        question,
+        code: `Sentence = "${sentence}"\nWord = "${word}"`,
+        result: index >= 0 ? `Word found at index ${index}` : "Word not found."
+      };
+    }
+
+    function task8() {
+      const question = "8. Use splice() to delete, insert, replace elements";
+      let items = ["Red", "Green", "Blue", "Yellow"];
+      items.splice(1, 1, "Black"); // Replace Green with Black
+      items.splice(2, 0, "White"); // Insert White after Black
+      items.splice(0, 1);          // Delete Red
+      return {
+        question,
+        code: `Final array: ${items}`,
+        result: `Array after splice: [${items.join(", ")}]`
+      };
+    }
+
+    function task9() {
+      const question = "9. Detect number of words, characters, spaces, and special symbols";
+      const input = prompt("Enter a sentence with special chars:", "Hello! How are you?");
+      const words = input.trim().split(/\s+/).length;
+      const chars = input.length;
+      const spaces = (input.match(/ /g) || []).length;
+      const specials = (input.match(/[^a-zA-Z0-9\s]/g) || []).length;
+      return {
+        question,
+        code: `Input: "${input}"`,
+        result: `Words: ${words}, Characters: ${chars}, Spaces: ${spaces}, Special Symbols: ${specials}`
+      };
+    }
+
+    function task10() {
+      const question = "10. Perform basic arithmetic or string addition based on input type";
+      let a = prompt("Enter first value:");
+      let b = prompt("Enter second value:");
+      let op = prompt("Enter operation (+, -, *, /):", "+");
+
+      const isNum = !isNaN(a) && !isNaN(b);
+      let result;
+      if (isNum) {
+        a = parseFloat(a);
+        b = parseFloat(b);
+        switch(op) {
+          case '+': result = a + b; break;
+          case '-': result = a - b; break;
+          case '*': result = a * b; break;
+          case '/': result = b !== 0 ? a / b : "Cannot divide by zero"; break;
+          default: result = "Invalid operation";
+        }
+      } else {
+        if (op === '+') {
+          result = a + b;
+        } else {
+          result = "Only + allowed for strings.";
+        }
+      }
+      return {
+        question,
+        code: `a="${a}", b="${b}", op="${op}"`,
+        result: `Result: ${result}`
+      };
+    }
+
+    // Bind button clicks to task functions
+    document.querySelectorAll(".task-box").forEach(el => {
+      el.addEventListener("click", async () => {
+        const t = +el.dataset.task;
+        const output = window["task" + t]();
+        const out = `
+          <p class="label">Question:</p>
+          <pre>${output.question}</pre>
+          <p class="label">Code & Demo:</p>
+          <pre>${output.code}</pre>
+          <p class="label">Result:</p>
+          <pre>${output.result}</pre>
+        `;
+        document.getElementById("outputContent").innerHTML = out;
+      });
+    });
+  </script>
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tourism Management System – Mini Project</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f8fb;
+      margin: 0;
+      padding: 40px 20px;
+      line-height: 1.6;
+      color: #2c3e50;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: #ffffff;
+      padding: 30px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+    }
+    h1 {
+      color: #0077b6;
+      font-size: 28px;
+      border-bottom: 2px solid #0077b6;
+      padding-bottom: 10px;
+    }
+    h2 {
+      color: #023e8a;
+      margin-top: 30px;
+      font-size: 20px;
+    }
+    ul {
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 8px;
+    }
+    .tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .tech-list span {
+      background: #dbeeff;
+      padding: 8px 12px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 15px;
+      margin-top: 20px;
+    }
+    .gallery img {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Mini Project Title: Tourism Management System</h1>
+
+    <h2>1) Problem Statement</h2>
+    <p>Tourists often struggle to find trustworthy information, book travel services, or plan trips efficiently. Traditional systems are time-consuming and disconnected, making the travel experience inconvenient and stressful.</p>
+
+    <h2>2) Objective</h2>
+    <p>To build an interactive, web-based Tourism Management System that enables users to explore destinations, book travel packages, view accommodations, and access essential travel information—all in one platform.</p>
+
+    <h2>3) Goal</h2>
+    <ul>
+      <li>Provide an intuitive interface for tourists to explore and plan trips</li>
+      <li>Enable online booking of packages and accommodation</li>
+      <li>Ensure real-time feedback and booking confirmation</li>
+      <li>Support admin functionalities for managing packages and listings</li>
+    </ul>
+
+    <h2>4) Result / Output</h2>
+    <ul>
+      <li>A fully functional tourism website with destination listings, package booking, and contact features</li>
+      <li>Real-time interaction using JavaScript</li>
+      <li>User-friendly, mobile-responsive layout</li>
+    </ul>
+
+    <h2>5) Technology Used</h2>
+    <div class="tech-list">
+      <span>HTML</span>
+      <span>CSS</span>
+      <span>JavaScript</span>
+      <span>PHP</span>
+      <span>MySQL</span>
+      <span>Bootstrap</span>
+    </div>
+
+    <h2>6) User Audience</h2>
+    <ul>
+      <li>Domestic and international tourists</li>
+      <li>Travel agencies and tour operators</li>
+      <li>Local guides and tourism boards</li>
+      <li>Students and educators in travel and hospitality studies</li>
+    </ul>
+
+    <h2>7) Impact on Society</h2>
+    <ul>
+      <li>Encourages digital tourism and simplifies travel planning</li>
+      <li>Boosts tourism-related businesses by providing online visibility</li>
+      <li>Saves time and reduces dependency on physical bookings</li>
+      <li>Promotes eco-friendly practices by minimizing paperwork</li>
+      <li>Increases travel safety through access to updated travel info</li>
+    </ul>
+
+    <h2>SCREENSHOTS</h2>
+    <div class="gallery">
+      <img src="C:\Users\suchi\OneDrive\Documents\Desktop\Pictures\Screenshots\Screenshot 2025-06-13 215704.png" alt="">
+      <img src="C:\Users\suchi\OneDrive\Documents\Desktop\Pictures\Screenshots\Screenshot 2025-06-13 215725.png" alt="">
+      <img src="C:\Users\suchi\OneDrive\Documents\Desktop\Pictures\Screenshots\Screenshot 2025-06-13 215744.png" alt="">
+      <img src="https://drive.google.com/file/d/19JIXM1OtTwou1tRRCZ1NZUFJwT0VICC1/view?usp=drivesdk" alt="">
+      
+    </div>
+
+  </div>
+</body>
+</html>
+
